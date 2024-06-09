@@ -3,7 +3,7 @@
   }
 
 .login-container{
-    max-width: 400px;
+  
     border-style: solid;
     border-width: 1px;
     border-color:black;
@@ -20,4 +20,18 @@
 
 .example-button-row .mat-button-base {
     margin: 8px 8px 8px 0;
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 300px;
+  
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  td {
+    padding-right: 8px;
   }

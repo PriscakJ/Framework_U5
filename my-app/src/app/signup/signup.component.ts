@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormControl, Validators, NgForm, AbstractControl} from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +15,11 @@ export class SignupComponent {
 
   password_comparison = new FormControl('', Validators.pattern('psd'));
   hide = true;
+
+  onSubmit(form: NgForm){
+    console.log(form.value);
+
+  }
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
