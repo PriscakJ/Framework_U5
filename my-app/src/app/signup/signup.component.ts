@@ -1,37 +1,33 @@
 import { Component } from '@angular/core';
-import {FormControl, Validators, NgForm, AbstractControl} from '@angular/forms';
+import { FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  email = new FormControl('', [Validators.required, Validators.email]);
-
-  email_first = 'hello';
-  password1 = '';
-  password2 = '';
-
-  password_comparison = new FormControl('', Validators.pattern('psd'));
   hide = true;
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password1: string = '';
+  password2: string= '';
+  address: string= '';
+  city: string= '';
+  state: string= '';
+  postalCode: string= '';
 
-  onSubmit(form: NgForm){
-    console.log(form.value);
-
-  }
-
-  getErrorMessage() {
-    if (this.email.hasError('required')) {
+  getErrorMessage(input: FormControl| any) {
+    if (input.hasError('required')) {
       return 'You must enter a value';
     }
-/*     if (this.password_comparison.hasError('pattern')){
-      return 'doesnt match';
-    } */
-   if (this.password1 != this.password2){
-    return 'Passwords dont match!'
-   }
+    return input.hasError('email') ? 'Not a valid email' : '';
+  }
 
-    return this.email.hasError('email') ? 'Not a valid email' : '';
+  onSubmit(form: any) {
+    if (form.valid && this.password1 === this.password2) {
+      console.log('Form Submitted!', form.value);
+    } else {
+      console.log('Passwords do not match or form is invalid');
+    }
   }
 }
