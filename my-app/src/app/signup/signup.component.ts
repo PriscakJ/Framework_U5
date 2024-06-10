@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+/* import { Component } from '@angular/core';
 import { FormControl, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
@@ -35,6 +35,61 @@ export class SignupComponent {
   onSubmit(form: any) {
     if (form.valid && this.password1 === this.password2) {
       console.log('Form Submitted!', form.value);
+    } else {
+      console.log('Passwords do not match or form is invalid');
+    }
+  }
+} */
+
+  import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
+})
+export class SignupComponent {
+  hide = true;
+
+  // Create the form group with controls
+  signupForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password1: new FormControl('', [Validators.required]),
+    password2: new FormControl('', [Validators.required]),
+    address: new FormControl('Getreidemarkt 1'),
+    city: new FormControl(''),
+    state: new FormControl(''),
+    postalCode: new FormControl('94043', [Validators.required, Validators.maxLength(5)])
+  });
+
+  // Function to compare passwords
+  get passwordsMatch(): boolean {
+    return this.signupForm.get('password1')?.value === this.signupForm.get('password2')?.value;
+  }
+
+  // Function to return appropriate error messages
+  getErrorMessage(controlName: string): string {
+    const control = this.signupForm.get(controlName);
+
+    if (control?.hasError('required')) {
+      return 'You must enter a value';
+    }
+    
+    if (controlName === 'email' && control?.hasError('email')) {
+      return 'Not a valid email';
+    }
+
+    if (controlName === 'postalCode' && control?.hasError('maxlength')) {
+      return 'Postal code cannot be more than 5 characters';
+    }
+
+    return '';
+  }
+
+  onSubmit() {
+    if (this.signupForm.valid && this.passwordsMatch) {
+      console.log('Form Submitted!', this.signupForm.value);
     } else {
       console.log('Passwords do not match or form is invalid');
     }

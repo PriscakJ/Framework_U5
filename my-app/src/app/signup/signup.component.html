@@ -1,61 +1,62 @@
-<form class="example-form" #signupForm="ngForm" (ngSubmit)="onSubmit(signupForm)">
-  <!-- Username Field -->
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <!-- Email Field -->
   <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Username</mat-label>
-    <input matInput placeholder="pat@example.com" [formControl]="email" required>
-    <mat-error *ngIf="email.invalid">Invalid email adress</mat-error>
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="pat@example.com" formControlName="email" required>
+    <mat-error *ngIf="signupForm.get('email')!.invalid">{{ getErrorMessage('email') }}</mat-error>
   </mat-form-field>
 
   <!-- Password Field -->
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Enter your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password1">
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password1" required>
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
   </mat-form-field>
 
   <!-- Confirm Password Field -->
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Confirm your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password2" [formControl]="password_comparison">
+    <input matInput [type]="hide ? 'password' : 'text'" formControlName="password2" required>
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
-    <mat-error *ngIf="password_comparison.invalid">Passwords dont</mat-error>
+    <mat-error *ngIf="!passwordsMatch && signupForm.get('password2')!.touched">Passwords do not match</mat-error>
   </mat-form-field>
 
   <!-- Company Field -->
   <mat-form-field class="example-full-width">
     <mat-label>Company (disabled)</mat-label>
-    <input matInput disabled value="FH Technikum Wien" name="company" ngModel>
+    <input matInput disabled value="FH Technikum Wien" name="company">
   </mat-form-field>
 
   <!-- Address Field -->
   <mat-form-field class="example-full-width">
     <mat-label>Address</mat-label>
-    <textarea matInput placeholder="Ex. 100 Main St" [(ngModel)]="address" name="address">Getreidemarkt 1</textarea>
+    <textarea matInput placeholder="Ex. 100 Main St" formControlName="address"></textarea>
   </mat-form-field>
 
   <!-- City Field -->
   <mat-form-field class="example-full-width">
     <mat-label>City</mat-label>
-    <input matInput placeholder="Ex. San Francisco" [(ngModel)]="city" name="city">
+    <input matInput placeholder="Ex. San Francisco" formControlName="city">
   </mat-form-field>
 
   <!-- State Field -->
   <mat-form-field class="example-full-width">
     <mat-label>State</mat-label>
-    <input matInput placeholder="Ex. California" [(ngModel)]="state" name="state">
+    <input matInput placeholder="Ex. California" formControlName="state">
   </mat-form-field>
 
   <!-- Postal Code Field -->
   <mat-form-field class="example-full-width">
     <mat-label>Postal Code</mat-label>
-    <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" [(ngModel)]="postalCode" name="postalCode" value="94043">
-    <mat-hint>{{ postalCode.value.length }} / 5</mat-hint>
+    <input matInput maxlength="5" placeholder="Ex. 94105" formControlName="postalCode">
+    <mat-hint>{{ signupForm.get('postalCode')?.value?.length || 0 }} / 5</mat-hint>
+    <mat-error *ngIf="signupForm.get('postalCode')!.invalid">{{ getErrorMessage('postalCode') }}</mat-error>
   </mat-form-field>
 
   <!-- Submit Button -->
-  <button mat-raised-button color="primary" type="submit">Login</button>
+  <button mat-raised-button color="primary" type="submit">Sign Up</button>
 </form>
