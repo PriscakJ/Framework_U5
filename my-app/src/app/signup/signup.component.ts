@@ -16,11 +16,18 @@ export class SignupComponent {
   state: string= '';
   postalCode: string= '';
 
-  getErrorMessage(input: FormControl| any) {
-    if (input.hasError('required')) {
+  getErrorMessage() {
+    if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
-    return input.hasError('email') ? 'Not a valid email' : '';
+/*     if (this.password_comparison.hasError('pattern')){
+      return 'doesnt match';
+    } */
+   if (this.password1 != this.password2){
+    return 'Passwords dont match!'
+   }
+
+    return this.email.hasError('email') ? 'Not a valid email' : '';
   }
 
   onSubmit(form: any) {
