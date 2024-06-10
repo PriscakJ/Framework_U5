@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 import {FormControl, Validators} from '@angular/forms';
 
 @Component({

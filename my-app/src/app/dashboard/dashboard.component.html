@@ -1,1 +1,8 @@
-<p>dashboard works!</p>
+<!-- #docregion mat-menu-trigger-for -->
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<!-- #enddocregion mat-menu-trigger-for -->
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/login">Item 1</button>
+  <button mat-menu-item routerLink="/signup">Item 2</button>
+</mat-menu>
+<router-outlet></router-outlet> 
