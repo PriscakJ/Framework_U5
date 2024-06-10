@@ -2,27 +2,27 @@
   <!-- Username Field -->
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Username</mat-label>
-    <input matInput placeholder="pat@example.com" required name="email" [(ngModel)]="email" #emailInput="ngModel">
-    <mat-error *ngIf="emailInput.invalid">{{ getErrorMessage()}}</mat-error>
+    <input matInput placeholder="pat@example.com" [formControl]="email" required>
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
   </mat-form-field>
 
   <!-- Password Field -->
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Enter your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" required name="password1" [(ngModel)]="password1" #password1Input="ngModel">
-    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password1">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
   </mat-form-field>
 
   <!-- Confirm Password Field -->
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Confirm your password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" required name="password2" [(ngModel)]="password2" #password2Input="ngModel">
-    <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-      <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+    <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="password2" [formControl]="password_comparison">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
-    <mat-error *ngIf="password2Input.invalid">{{ getErrorMessage() }}</mat-error>
+    <mat-error *ngIf="password_comparison.invalid">{{getErrorMessage()}}</mat-error>
   </mat-form-field>
 
   <!-- Company Field -->
