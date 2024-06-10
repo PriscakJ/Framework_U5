@@ -3,7 +3,7 @@
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Username</mat-label>
     <input matInput placeholder="pat@example.com" [formControl]="email" required>
-    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+    <mat-error *ngIf="email.invalid">Invalid email adress</mat-error>
   </mat-form-field>
 
   <!-- Password Field -->
@@ -22,7 +22,7 @@
     <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
     </button>
-    <mat-error *ngIf="password_comparison.invalid">{{getErrorMessage()}}</mat-error>
+    <mat-error *ngIf="password_comparison.invalid">Passwords dont</mat-error>
   </mat-form-field>
 
   <!-- Company Field -->
