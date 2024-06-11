@@ -1,30 +1,42 @@
-let express = require('express');
-let app = express();
+const express = require('express');
+const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({
     extended: false
 }));
 
-//POST route for login
-app.post('/login', (res,req)=>{
+// POST route for root (test route)
+app.post('/', (req, res) => {
+    console.log('Received a request at the root endpoint');
+    res.status(200).json({
+        message: 'Root endpoint'
+    });
+});
+app.use((req,res)=>{
+    console.log('aaa');
+});
+
+// POST route for login
+app.post('/login', (req, res) => {
     const loginData = JSON.stringify(req.body);
     console.log(loginData);
 
-    //login check..
+    // login check..
     res.status(200).json({
-        message: 'Login successfull'
-    })
+        message: 'Login successful'
+    });
 });
-app.post('/signup', (res,req)=>{
+
+// POST route for signup
+app.post('/signup', (req, res) => {
     const signupData = JSON.stringify(req.body);
     console.log(signupData);
 
-    //login check..
+    // signup check..
     res.status(200).json({
-        message:'Signup successfull'
-    })
+        message: 'Signup successful'
+    });
 });
-
 
 module.exports = app;

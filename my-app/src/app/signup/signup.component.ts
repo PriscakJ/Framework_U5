@@ -44,6 +44,7 @@ export class SignupComponent {
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { response } from 'express';
 
 
 @Component({
@@ -95,12 +96,17 @@ export class SignupComponent {
     return '';
   }
 
-  onSubmit(form: NgForm) {
-    if (this.signupForm.valid && this.passwordsMatch) {
+  onSubmit(): void {
+    if (this.signupForm.valid) {
       console.log('Form Submitted!', this.signupForm.value);
-      this.http.post<{ message: string}>('http://localhost:3000/login', form.value, this.httpOptions)
+      this.http.post<{ message: string }>('http://localhost:3000/signup', this.signupForm.value, this.httpOptions)
+        .subscribe(responseData => {
+          console.log(responseData.message);
+        }, error => {
+          console.error('Error:', error);
+        });
     } else {
-      console.log('Passwords do not match or form is invalid');
+      console.log('Form is invalid');
     }
   }
 }
