@@ -41,8 +41,10 @@ export class SignupComponent {
   }
 } */
 
-  import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-signup',
@@ -50,6 +52,12 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+
+  constructor(private http: HttpClient){}
+  httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+  };
+
   hide = true;
 
   // Create the form group with controls
@@ -87,9 +95,10 @@ export class SignupComponent {
     return '';
   }
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
     if (this.signupForm.valid && this.passwordsMatch) {
       console.log('Form Submitted!', this.signupForm.value);
+      this.http.post<{ message: string}>('http://localhost:3000/login', form.value, this.httpOptions)
     } else {
       console.log('Passwords do not match or form is invalid');
     }
