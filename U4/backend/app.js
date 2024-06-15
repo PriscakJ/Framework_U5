@@ -44,5 +44,9 @@ app.put("/highscores/1", (req, res) => {
     console.log('highscore updated');
     res.status(200).send("Highscore updated");
 });
+app.get("/highscores", (req, res) => {
+    const highscores = db.getHighscores();
+    res.status(200).json(highscores);
+});
 
 module.exports = app;

@@ -45,6 +45,12 @@ export class BackendService {
         catchError(this.handleError<any>('update'))
       );
   }
+  getHighscores(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:3000/highscores')
+      .pipe(
+        catchError(this.handleError<any[]>('getHighscores', []))
+      );
+  }
 
   private getToken(): string | null {
     return this.token || localStorage.getItem('authToken');

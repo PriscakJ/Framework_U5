@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { LandpageComponent } from './landpage/landpage.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { LandpageComponent } from './landpage/landpage.component';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatListModule,
     MatCardModule,
     MatProgressSpinnerModule,
     MatButtonModule,

@@ -12,6 +12,11 @@
 
 <button mat-raised-button color="primary" (click)="displayList()">Display list</button>
 <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+    <mat-list>
+        <mat-list-item *ngFor="let highscore of highscores">
+        {{ highscore.username }}: {{ highscore.score }}
+        </mat-list-item>
+    </mat-list>
 </mat-card>
 </div>
 

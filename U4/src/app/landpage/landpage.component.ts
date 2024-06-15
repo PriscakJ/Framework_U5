@@ -10,8 +10,16 @@ import { Router } from '@angular/router';
 })
 export class LandpageComponent {
   scoreForm: FormGroup;
+  highscores: any[] = [];
   
-
+  ngOnInit(): void {
+    this.loadHighscores();
+  }
+  loadHighscores(): void {
+    this.backendService.getHighscores().subscribe(data => {
+      this.highscores = data;
+    });
+  }
 constructor(
   private backendService: BackendService,
   private fb: FormBuilder,
