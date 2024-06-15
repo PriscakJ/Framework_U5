@@ -19,7 +19,7 @@ constructor(
 
 ){
   this.scoreForm = this.fb.group({
-    score: ['', [Validators.required, Validators.min(0)]]
+    score: ['', [Validators.required, Validators.min(0), Validators.pattern('[0-9]*')]]
   });
 };
 
@@ -35,5 +35,14 @@ updateScore(): void {
     
   }
 }
+logout(): void {
+  // Implement logout functionality
+  // E.g., this.authService.logout();
+  this.router.navigate(['/login']);
+}
 
+displayList(): void {
+  // Implement display list functionality
+  // E.g., this.router.navigate(['/list']);
+}
 }

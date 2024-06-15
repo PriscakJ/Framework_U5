@@ -1,13 +1,18 @@
 <p>landpage works!</p>
-
+<div style="max-width: 600px;">
 <mat-card>
-<form [formGroup]="scoreForm" (ngSubmit)="updateScore()">
- <mat-form-field>        
-    <input matInput formControlName = "score" placeholder="Enter Score">
-    <button mat-raised-button color="primary">Update</button>
- </mat-form-field>
-</form>
-<button mat-raised-button color="primary">Display list</button>
-<button mat-raised-button color="primary">Logout</button>
+    <form [formGroup]="scoreForm" (ngSubmit)="updateScore()">
+    <mat-form-field>        
+        <input matInput formControlName = "score" placeholder="Enter Score">
+        <button mat-raised-button color="primary">Update</button>
+        <mat-error *ngIf="form['score']?.errors?.['required']">Please enter a valid value.</mat-error>
+        <mat-error *ngIf="form['score']?.errors?.['min']">Value must be higher then 0!  </mat-error>
+        <mat-error *ngIf="form['score']?.errors?.['pattern']">Please enter a number!</mat-error>
+    </mat-form-field>
+    </form>
 
+<button mat-raised-button color="primary" (click)="displayList()">Display list</button>
+<button mat-raised-button color="primary" (click)="logout()">Logout</button>
 </mat-card>
+</div>
+
