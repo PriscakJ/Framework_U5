@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl, FormBuilder, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
     ])
   });
 
-  constructor(private fb: FormBuilder, private backendService: BackendService) { }
+  constructor(private fb: FormBuilder, private backendService: BackendService, private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -30,6 +31,9 @@ export class LoginComponent implements OnInit {
       this.backendService.login(
         this.form["email"].value, 
         this.form["password"].value);
+      
+
+      this.router.navigate(['/landpage']);
     }
   }
 

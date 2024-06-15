@@ -50,5 +50,9 @@ app.post("/login", (req, res) => {
     }
 });
 
+app.put("/highscore/1", (req, res) =>{
+    console.log('highscore updated')
+});
+
 module.exports = app;
 

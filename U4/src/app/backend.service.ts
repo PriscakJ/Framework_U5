@@ -18,4 +18,11 @@ export class BackendService {
         console.log(responseData.Token);
       });
   }
+
+  update(score: any){
+    this.http.put<{ Token: string}>('http://localhost:3000/highscores/1',{"score": score}, this.httpOptions)
+    .subscribe((responseData) => {
+      console.log(responseData.Token);
+    });
+  }
 }
