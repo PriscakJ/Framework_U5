@@ -19,17 +19,20 @@ app.use((req, res, next) => {
 
 app.get("/", (req, res) => {
     // Alle Token Daten ausgeben
+    console.log('token Data:');
     console.log(tokenData);
     res.status(200).json(tokenData);
 });
 
 app.post("/login", (req, res) => {
     // Übergebene Daten loggen
+    console.log('login data:');
     console.log(req.body);
 
     // Passwort überprüfen
     if (req.body.password === userData[req.body.email]) {
         // Login erfolgreich
+        console.log('login successful');
         // Token erstellen
         const token = (Math.random() + 1).toString(36).substring(2)
 
