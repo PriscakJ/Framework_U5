@@ -50,8 +50,22 @@ app.post("/login", (req, res) => {
     }
 });
 
-app.put("/highscore/1", (req, res) =>{
-    console.log('highscore updated')
+// Middleware to check token
+function authenticateToken(req, res, next) {
+    const token = req.headers['authorization'];
+    if (!token) return res.sendStatus(403);
+
+    // Find user by token
+    const user = Object.keys(tokenData).find(email => tokenData[email] === token);
+    if (!user) return res.sendStatus(403);
+
+    req.user = user;
+    next();
+}
+
+app.put("/highscore/1", authenticateToken, (req, res) =>{
+    console.log('highscore updated');
+    res.status(200).send('Highscore updated');
 });
 
 module.exports = app;

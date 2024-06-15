@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl, FormBuilder, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BackendService } from '../backend.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,10 @@ export class LoginComponent implements OnInit {
     ])
   });
 
-  constructor(private fb: FormBuilder, private backendService: BackendService, private router: Router) { }
+  constructor(
+    private fb: FormBuilder, 
+    private backendService: BackendService, 
+    private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -30,10 +34,26 @@ export class LoginComponent implements OnInit {
       this.isLoading = true;
       this.backendService.login(
         this.form["email"].value, 
-        this.form["password"].value);
-      
-
-      this.router.navigate(['/landpage']);
+        this.form["password"].value
+      ).subscribe(
+        response => {
+          this.isLoading = false;
+          if ('Token' in response) {
+            this.router.navigate(['/landpage']);
+          } else {
+            // Show error message
+            console.error('Login failed:', response.error);
+            // Optionally, display the error message to the user
+            alert(response.error);
+          }
+        },
+        error => {
+          this.isLoading = false;
+          console.error('Login failed', error);
+          // Optionally, display an error message to the user
+          alert('An error occurred during login. Please try again.');
+        }
+      );
     }
   }
 
